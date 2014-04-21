@@ -3,10 +3,9 @@
 //  From http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/browser-configuring.html
 AWS.config.region = 'ap-southeast-1';
 
-//  Also in the above URL there are details about configuring CORS, which I have
-//  for the time being ignored.
 
 
+//  Code stolen from http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/browser-examples.html
 function awsListImages () {
   var bucket = new AWS.S3({params: {Bucket: 'mipitw'}});
   bucket.listObjects(function (err, data) {
@@ -22,5 +21,17 @@ function awsListImages () {
       }
     }
   });
+}
 
+function awsLoadImage () {
+  var bucket = new AWS.S3({params: {Bucket: 'mipitw'}});
+  var smallImage = document.getElementById('smallImage');
+  var data = smallImage.src;
+
+  var results = document.getElementById('snapStatus');
+
+  var params = {Key: 'image.jpg', Body: data};
+  bucket.putObject(params, function (err, data) {
+      results.innerHTML = err ? 'ERROR!' : 'SAVED.';
+  }
 }

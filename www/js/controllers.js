@@ -11,6 +11,8 @@ angular.module('starter.controllers', [])
   $scope.takePic = function() {
     console.log('In takePic()');
     capturePhoto();
+    console.log('capturePhoto() success.  now calling awsLoadImage()')
+    awsLoadImage();
   }
 })
 
