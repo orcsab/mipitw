@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.ionicframework.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>HelloCordova</name>
+    <name>mipitw</name>
     <description>
-        An Ionic Framework and Cordova project.
+        The most interesting person in the world.
     </description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+    <author email="orcsab@gmail.com" href="http://e-scott.net/">
+      Scott Brady Drummonds
     </author>
     <content src="index.html" />
     <access origin="*" />
