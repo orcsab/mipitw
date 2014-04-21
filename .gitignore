@@ -1,3 +1,4 @@
 node_modules/
 platforms/android/
 plugins/android.json
+www/js/aws-credentials.js
