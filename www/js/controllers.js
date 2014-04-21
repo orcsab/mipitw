@@ -4,7 +4,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('SnapCtrl', function($scope) {
-  // This code came from here: http://forum.ionicframework.com/t/how-to-make-uploading-files-or-images-using-ionicframwork-or-angularjs/391/11
   $scope.takePic = function() {
     capturePhoto();
   }
