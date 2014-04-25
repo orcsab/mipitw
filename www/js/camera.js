@@ -33,6 +33,8 @@ function onPhotoDataSuccess(imageData) {
   // The inline CSS rules are used to resize the image
   //
   smallImage.src = "data:image/jpeg;base64," + imageData;
+
+  mongoWrite({email: "orcsab@gmail.com", date: "22 April 2014", location: "Hong Kong"});
 }
 
 // Called when a photo is successfully retrieved
@@ -58,6 +60,9 @@ function onPhotoURISuccess(imageURI) {
 // A button will call this function
 //
 function capturePhoto() {
+  // wrong place for this...just testing
+  mongoWrite({email: "orcsab@gmail.com", date: "22 April 2014", location: "Hong Kong"});
+
   // Take picture using device camera and retrieve image as base64-encoded string
   navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
     destinationType: destinationType.DATA_URL });

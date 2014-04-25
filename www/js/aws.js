@@ -1,8 +1,17 @@
-
+// verify that AWS credentials are in environment variables
+if (typeof awsConfig === 'undefined') {
+  document.getElementById('storageImages').innerHTML = 'awsConfig variable not defined';
+}
+if (typeof awsConfig['keyid'] === 'undefined') {
+  document.getElementById('storageImages').innerHTML = 'awsConfig[keyid] not defined';
+}
+if (typeof awsConfig['key'] === 'undefined') {
+  document.getElementById('storageImages').innerHTML = 'awsConfig[key] not defined';
+}
 
 //  From http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/browser-configuring.html
 AWS.config.region = 'ap-southeast-1';
-
+AWS.config.update({accessKeyId: awsConfig['keyid'], secretAccessKey: awsConfig['key']});
 
 
 //  Code stolen from http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/browser-examples.html
@@ -33,5 +42,5 @@ function awsLoadImage () {
   var params = {Key: 'image.jpg', Body: data};
   bucket.putObject(params, function (err, data) {
       results.innerHTML = err ? 'ERROR!' : 'SAVED.';
-  }
+  })
 }
