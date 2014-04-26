@@ -3,7 +3,7 @@ angular.module('starter.controllers', [])
 .controller('ExploreCtrl', function($scope) {
   $scope.listStoredImages = function () {
     console.log('In listStoredImages()');
-    awsListImages();
+    Server.getPhotoList('storageImages')
   }
 })
 
@@ -11,8 +11,17 @@ angular.module('starter.controllers', [])
   $scope.takePic = function() {
     console.log('In takePic()');
     capturePhoto();
-    console.log('capturePhoto() success.  now calling awsLoadImage()')
-    awsLoadImage();
+  }
+  $scope.submitPhoto = function() {
+    console.log('in submitPhoto()');
+    var photo = new Photo();
+
+    photo.meta.creator = document.getElementById('name').src;
+    photo.meta.date = document.getElementById('date').src;
+    photo.meta.caption = document.getElementById('caption').src;
+    photo.meta.location = document.getElementById('location').src;
+    photo.data = document.getElementById('smallImage').src;
+
   }
 })
 

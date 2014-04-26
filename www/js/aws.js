@@ -1,4 +1,4 @@
-// verify that AWS credentials are in environment variables
+// verify that AWS credentials were loaded from aws-config.js
 if (typeof awsConfig === 'undefined') {
   document.getElementById('storageImages').innerHTML = 'awsConfig variable not defined';
 }

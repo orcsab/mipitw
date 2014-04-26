@@ -60,8 +60,6 @@ function onPhotoURISuccess(imageURI) {
 // A button will call this function
 //
 function capturePhoto() {
-  // wrong place for this...just testing
-  mongoWrite({email: "orcsab@gmail.com", date: "22 April 2014", location: "Hong Kong"});
 
   // Take picture using device camera and retrieve image as base64-encoded string
   navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,

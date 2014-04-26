@@ -3,6 +3,16 @@
     <button class="snap-button" ng-click="takePic()">
       Take Picture
     </button>
+    <img id="smallImage" />
+    <form>
+      Name: <input type="text" name="name"><br>
+      Date: <input type="text" name="date"><br>
+      Location: <input type="text" name="location"><br>
+      Caption: <input type="text" name="caption"><br>
+    </form>
     <p id="snapStatus">No status.</p>
+    <button class="snap-button" ng-click="submitPhoto()">
+      Submit Photo
+    </button>
   </ion-content>
 </ion-view>
