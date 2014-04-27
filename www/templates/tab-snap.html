@@ -4,14 +4,21 @@
       Take Picture
     </button>
     <img id="smallImage" />
-    <form>
-      Name: <input type="text" name="name"><br>
-      Date: <input type="text" name="date"><br>
-      Location: <input type="text" name="location"><br>
-      Caption: <input type="text" name="caption"><br>
-    </form>
-    <p id="snapStatus">No status.</p>
-    <button class="snap-button" ng-click="submitPhoto()">
+    <div class="list list-inset">
+      <label class="item item-input">
+        <input type="text" placeholder="name" ng-modal="photo.user">
+      </label>
+      <label class="item item-input">
+        <input type="text" placeholder="location" ng-modal="photo.location">
+      </label>
+      <label class="item item-input">
+        <input type="text" placeholder="caption" ng-modal="photo.caption">
+      </label>
+    </div>
+
+    Data: {{data}}
+    Status: {{status}}
+    <button class="snap-button" ng-click="submitPhoto(photo)">
       Submit Photo
     </button>
   </ion-content>
