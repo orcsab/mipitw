@@ -7,10 +7,11 @@ angular.module('starter.controllers', [])
     // Server.getPhotoList('storageImages');
 
     console.log('listStoredImages(): ' + Server.name + '/getPhotos');
-    $http({method: 'GET', url: 'http://' + Server.name + '/getPhotos'}).
+    $http({method: 'GET',
+           url: 'http://' + Server.name + '/getPhotos'}).
       success(function(data, status, headers, config) {
         console.log('listStoredImages(): successful GET');
-        $scope.photoMetaList = ['success1', 'success2'];
+        $scope.photoMetaList = angular.fromJson(data);
       }).
       error(function(data, status, headers, config) {
         console.log('listStoredImages(): failed GET');
