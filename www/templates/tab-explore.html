@@ -4,6 +4,10 @@
     <button class="snap-button" ng-click="listStoredImages()">
       See List
     </button>
-    <p id="storageImages">Nothing yet from S3.</p>
+    <ul>
+      <li ng-repeat="photoMeta in photoMetaList">
+        {{photoMeta}}
+      </li>
+    </ul>
   </ion-content>
 </ion-view>

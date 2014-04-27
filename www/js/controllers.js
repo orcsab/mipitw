@@ -1,9 +1,22 @@
 angular.module('starter.controllers', [])
 
-.controller('ExploreCtrl', function($scope) {
+.controller('ExploreCtrl', function($scope, $http) {
   $scope.listStoredImages = function () {
     console.log('In listStoredImages()');
-    Server.getPhotoList('storageImages')
+
+    // Server.getPhotoList('storageImages');
+
+    console.log('listStoredImages(): ' + Server.name + '/getPhotos');
+    $http({method: 'GET', url: 'http://' + Server.name + '/getPhotos'}).
+      success(function(data, status, headers, config) {
+        console.log('listStoredImages(): successful GET');
+        $scope.photoMetaList = ['success1', 'success2'];
+      }).
+      error(function(data, status, headers, config) {
+        console.log('listStoredImages(): failed GET');
+        $scope.photoMetaList = ['fail'];
+      });
+
   }
 })
 

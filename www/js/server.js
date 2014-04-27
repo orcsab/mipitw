@@ -1,6 +1,6 @@
 var Server = {
-  name: 'heroku.com',
-  port: 1111,
+  name: 'pure-sands-5851.herokuapp.com',
+  port: 80,
   awsBucket: 'mipitw',
   sendPhoto: function (data, creator, caption, date, location) {
   },
@@ -12,20 +12,13 @@ var Server = {
     creator = (typeof creator === "undefined") ? "" : creator;
 
     console.log('in getPhotoList()');
-    var bucket = new AWS.S3({params: {Bucket: this.awsBucket}});
-    bucket.listObjects(function (err, data) {
-      if (err) {
-        document.getElementById(id).innerHTML =
-          'Could not load objects from S3';
-      } else {
-        document.getElementById(id).innerHTML =
-          'Loaded ' + data.Contents.length + ' items from S3';
-        for (var i = 0; i < data.Contents.length; i++) {
-          document.getElementById('objects').innerHTML +=
-            '<li>' + data.Contents[i].Key + '</li>';
-        }
-      }
-    });
+    $http({method: 'GET', url: this.name + '/getPhotos'}).
+      success(function(data, status, headers, config) {
+        document.getElementById(id).innerHTML = data;
+      }).
+      error(function(data, status, headers, config) {
+        document.getElementById(id).innerHTML = "failed to get photo meta from " + name;
+      });
   },
 
   getPhoto: function (id) {
