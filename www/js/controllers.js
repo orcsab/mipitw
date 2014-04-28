@@ -22,7 +22,7 @@ angular.module('starter.controllers', [])
 
 .controller('SnapCtrl', function($scope, $http) {
   $scope.photo = {
-    user: "unnamed",
+    name: "unnamed",
     location: "unspecified",
     caption: "uncompleted"
   }
@@ -34,7 +34,7 @@ angular.module('starter.controllers', [])
     console.log('in submitPhoto()');
     var photo = {
       meta: {
-        creator: $scope.photo.name,
+        user: $scope.photo.name,
         date: new Date(),
         caption: $scope.photo.caption,
         location: $scope.photo.location
@@ -42,11 +42,12 @@ angular.module('starter.controllers', [])
       // data: document.getElementById('smallImage').src
     };
 
-    console.log('submitPhoto(): posting ' + JSON.stringify(photo));
+    console.log('submitPhoto(): posting ' + JSON.stringify(photo.meta));
     $http({
       url: Server.name + '/postPhoto',
       method: "POST",
-      data: photo.meta
+      data: photo.meta,
+      headers: {'Content-Type': 'application/json'}
     }).success(function(data, status, headers, config) {
       $scope.data = data;
     }).error(function(data, status, headers, config) {
