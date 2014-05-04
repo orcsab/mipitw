@@ -1,13 +1,22 @@
 <ion-view title="Explore">
   <ion-content class="has-header padding">
     <h1>Wall of Fame</h1>
-    <button class="snap-button" ng-click="listStoredImages()">
+    <div class="list">
+      <a ng-repeat="photo in photoList" class="item item-thumbnail-left" href="#">
+        <img ng-src="{{photo.url}}" />
+        <h2>{{photo.creator}} ({{photo.location}})</h2>
+        <p>{{photo.date}}</p>
+        <p>{{photo.caption}}</p>
+      </a>
+    </div>
+
+<!--     <button class="snap-button" ng-click="listStoredImages()">
       See List
     </button>
     <ul>
       <li ng-repeat="photoMeta in photoMetaList">
         {{photoMeta}}
       </li>
-    </ul>
+    </ul> -->
   </ion-content>
 </ion-view>

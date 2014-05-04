@@ -33,8 +33,6 @@ function onPhotoDataSuccess(imageData) {
   // The inline CSS rules are used to resize the image
   //
   smallImage.src = "data:image/jpeg;base64," + imageData;
-
-  mongoWrite({email: "orcsab@gmail.com", date: "22 April 2014", location: "Hong Kong"});
 }
 
 // Called when a photo is successfully retrieved
