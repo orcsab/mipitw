@@ -10,12 +10,12 @@ angular.module('starter.controllers', ['Server'])
     console.log("getThumbs(): photoList = " + JSON.stringify(photoList));
     for (i in photoList) {
       console.log("getThumbs(): getting URL for " + JSON.stringify(photoList[i]));
-      server.getPhoto({id: photoList[i]._id, thumb: true, url: true}).success (function(data) {
-        console.log("getThumbs(): got thumb url: " + data);
-        photoList[i].url = data;
+      server.getPhoto({id: photoList[i]._id, thumb: true, url: false}).success (function(data) {
+        console.log("getThumbs(): got thumb: " + data);
+        photoList[i].data = "data:image/jpeg;base64," + data;
       })
       .error  (function (reason) {
-        console.log("ExploreCtrl: failed to get thumb url for " + photoList[i]._id);
+        console.log("ExploreCtrl: failed to get thumb for " + photoList[i]._id);
       });
     }
 
@@ -46,29 +46,22 @@ angular.module('starter.controllers', ['Server'])
   $scope.submitPhoto = function(photo) {
     console.log('in submitPhoto()');
     var date = new Date();
+
+    //  split out the base64 encoded image data from its header.
+    var parts = document.getElementById('smallImage').src.split(",");
+    console.log("submitPhoto(): image data split into parts: " + parts.length);
     var photo = {
       meta: {
         user: $scope.photo.name,
         caption: $scope.photo.caption,
         location: $scope.photo.location
       },
-      data: document.getElementById('smallImage').src
+      data: parts[1]
     };
 
     console.log('submitPhoto(): posting ' + JSON.stringify(photo));
     server.sendPhoto(photo);
     console.log('submitPhoto(): photo appears to be sent');
-    // $http({
-    //   url: Server.name + '/postPhoto',
-    //   method: "POST",
-    //   data: photo,
-    //   headers: {'Content-Type': 'application/json'}
-    // }).success(function(data, status, headers, config) {
-    //   $scope.data = data;
-    // }).error(function(data, status, headers, config) {
-    //   $scope.status = status;
-    // });
-
   }
 }])
 
