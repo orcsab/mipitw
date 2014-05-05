@@ -2,8 +2,8 @@ var server = angular.module('Server', []);
 
 server.factory('Server', function($http) {
   return {
-    // url: 'http://pure-sands-5851.herokuapp.com',
-    url: 'http://localhost:4791',
+    url: 'http://pure-sands-5851.herokuapp.com',
+    // url: 'http://localhost:4791',
 
     // args:
     // photo is an object containing the image data and metadata.
@@ -41,13 +41,26 @@ server.factory('Server', function($http) {
       console.log("Server.getPhoto() getting for key " + key);
       return $http({method: 'GET', url: this.url + '/getPhoto', params: {key: key, type: type}})
       .success(function(data) {
-        console.log("Server.getPhoto() success: " + JSON.stringify(data));
+        console.log("Server.getPhoto() success");
         return data;
       })
       .error(function (reason) {
         console.log("Server.getPhoto() failure");
         return reason;
       });
+    },
+
+    //  this function will add to the photo object argument the thumbnail data.  it
+    //  will also return the promise from $http but return the newly modified object
+    //  from the callback for further processing in the "success" operation.
+    addThumb: function (photo) {
+      return this.getPhoto({id: photo._id, thumb: true, url: false}).success(function (data) {
+        photo.data = "data:image/jpeg;base64," + data;
+        return photo;
+      })
+      .error (function (reason) {
+        console.log("addThumb: failed because: " + reason);
+      })
     }
   }
 });

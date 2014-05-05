@@ -7,20 +7,19 @@ angular.module('starter.controllers', ['Server'])
 
   console.log("entering ExploreCtrl");
   var getThumbs = function(photoList) {
+    $scope.photoList = photoList;
     console.log("getThumbs(): photoList = " + JSON.stringify(photoList));
-    for (i in photoList) {
-      console.log("getThumbs(): getting URL for " + JSON.stringify(photoList[i]));
-      server.getPhoto({id: photoList[i]._id, thumb: true, url: false}).success (function(data) {
-        console.log("getThumbs(): got thumb: " + data);
-        photoList[i].data = "data:image/jpeg;base64," + data;
+    for (i in $scope.photoList) {
+      console.log("getThumbs(): getting thumb for " + JSON.stringify(photoList[i]));
+      server.addThumb($scope.photoList[i]).success (function (photo) {
+        console.log("getPhoto(): success for " + photo._id);
       })
-      .error  (function (reason) {
-        console.log("ExploreCtrl: failed to get thumb for " + photoList[i]._id);
+      .error (function (reason) {
+        console.log("getThumbs: failed because: " + reason);
       });
     }
 
     console.log("ExplorCtrl: photoList = " + JSON.stringify(photoList));
-    $scope.photoList = photoList;
   };
 
   console.log("ExploreCtrl: calling server.getPhotoList()");
